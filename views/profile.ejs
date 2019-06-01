@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <% include blocks/links.ejs %>
+    <script src="/scripts/cart-manipulation.js"></script>
+</head>
+<body>
+
+<% include blocks/menu.ejs %>
+
+<div class="container">
+    <div class="row">
+        <div class="card col-lg-12">
+            <h2>Profile</h2>    
+            <h4>Username: <%=user.username%> </h4>
+            <h4>Name: <%=user.name%> </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card col-lg-12">
+            <a href="/change-profile" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Змінити профіль</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<% include blocks/footer.ejs %>
+
+</body>
+</html>

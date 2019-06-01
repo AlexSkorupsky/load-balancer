@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include blocks/links.ejs %>
+    <script src="/scripts/get-progress.js" ></script>
+</head>
+<body>
+
+<% include blocks/menu.ejs %>
+
+<div id="main"> 
+    <h2>Історія для ключового слова: "<%=keyword%>"</h2>
+    <%if (calcs.length === 0) {%>
+        <h3>Історія пуста</h3>
+    <%} else {%>
+        <div class="container">
+            <%for (var i = 0; i < calcs.length; ++i) { %> 
+                <div class="row">
+                    <div class="card col-lg-12">
+                        <p>-(<%=calcs[i].Tvalue%>)u''(x) + (<%=calcs[i].Bvalue%>)u'(x) + (<%=calcs[i].Svalue%>)u(x) = <%=calcs[i].Fvalue%></p>
+                        <p>N = <%=calcs[i].N%></p>
+                        <%if (calcs[i].Progress == 100) {%>
+                            <div class="result-block" id="<%=calcs[i]._id%>">
+                                <a style = "margin-bottom: 1em" href = "/result/<%=calcs[i]._id%>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Результат</a>
+                            </div>
+                        <%} else if (calcs[i].Progress == -1) {%>
+                            <div class="queue-block" id="<%=calcs[i]._id%>">
+                                <p>В черзі</p>
+                            </div>
+                        <%} else {%>
+                            <div class="progress-block" id="<%=calcs[i]._id%>">
+                                <p>Виконується</p>
+                                <p>Прогрес:</p>
+                                <div class="progress">
+                                    <div class="progress progress-bar" role="progressbar" aria-valuenow="<%=calcs[i].Progress%>"
+                                        aria-valuemin="0" aria-valuemax="100" style="width: <%=calcs[i].Progress%>%" id = "<%=calcs[i]._id%>">
+                                        <%=calcs[i].Progress%>
+                                    </div>
+                                </div>
+                                <a style = "margin-bottom: 1em" href = "/history" class="btn btn-primary btn-lg active get-progress" role="button" aria-pressed="true" id = "<%=calcs[i]._id%>">Обновити прогрес</a>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    <%}%>
+                            
+                            <% include blocks/footer.ejs %>
+</div>
+  
+  <script src="/scripts/menuScript.js"></script>
+     
+  </body>
+  </html>
